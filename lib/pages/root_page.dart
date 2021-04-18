@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'login_signup_page.dart';
 import '../components/authentication.dart';
 import 'home_page.dart';
+import 'post_add_page.dart';
 
 enum AuthStatus {
   NOT_DETERMINED,
@@ -31,7 +32,7 @@ class _RootPageState extends State<RootPage> {
           _userId = user?.uid;
         }
         authStatus =
-        user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
+            user?.uid == null ? AuthStatus.NOT_LOGGED_IN : AuthStatus.LOGGED_IN;
       });
     });
   }
