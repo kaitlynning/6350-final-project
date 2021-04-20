@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 
 class PostAddPage extends StatefulWidget {
   @override
@@ -73,7 +74,9 @@ class _PostAddPageState extends State<PostAddPage> {
               showTitleInput(),
               showPriceInput(),
               showDescInput(),
-              showButton()
+              showImageView(),
+              showPhotoButton(),
+              showSubmitButton()
             ],
           ),
         ));
@@ -136,11 +139,53 @@ class _PostAddPageState extends State<PostAddPage> {
     );
   }
 
-  Widget showButton() {
+  Widget showImageView() {
+    return new Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+        child: _imageList == null || _imageList.length == 0
+            ? SizedBox(
+                height: 20.0,
+              )
+            : Container(
+                child: SizedBox(
+                  height: 130,
+                  child: GridView.count(
+                    crossAxisCount: 4,
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 20,
+                    children: List.generate(
+                      _imageList.length,
+                      (index) {
+                        return Image.file(_imageList[index]);
+                      },
+                    ),
+                  ),
+                ),
+              ));
+  }
+
+  Widget showPhotoButton() {
     return new Padding(
         padding: EdgeInsets.fromLTRB(0.0, 45.0, 0.0, 0.0),
         child: SizedBox(
-          height: 40.0,
+          height: 50.0,
+          child: new RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text('Take Photo',
+                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: takePhoto,
+          ),
+        ));
+  }
+
+  Widget showSubmitButton() {
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 35.0, 0.0, 0.0),
+        child: SizedBox(
+          height: 50.0,
           child: new RaisedButton(
             elevation: 5.0,
             shape: new RoundedRectangleBorder(
