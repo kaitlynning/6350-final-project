@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PostAddPage extends StatefulWidget {
   @override
@@ -9,7 +11,27 @@ class _PostAddPageState extends State<PostAddPage> {
   String _title;
   double _price;
   String _desc;
+  List<File> _imageList;
+
   final _formKey = GlobalKey<FormState>();
+
+  takePhoto() async {
+    File file = await ImagePicker.pickImage(source: ImageSource.camera);
+    if (file != null) {
+      //imagesMap[imagesMap.length] = file;
+      List<File> imageFile = new List();
+      // imageList = new List.from(imageFile);
+      imageFile.add(file);
+      if (_imageList == null) {
+        _imageList = new List.from(imageFile, growable: true);
+      } else {
+        for (int s = 0; s < imageFile.length; s++) {
+          _imageList.add(file);
+        }
+      }
+      setState(() {});
+    }
+  }
 
   bool validateAndSave() {
     final form = _formKey.currentState;
@@ -89,7 +111,7 @@ class _PostAddPageState extends State<PostAddPage> {
               Icons.money,
               color: Colors.grey,
             )),
-        validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+        validator: (value) => value.isEmpty ? 'Price can\'t be empty' : null,
         onSaved: (value) => _price = double.parse(value),
       ),
     );
@@ -126,7 +148,7 @@ class _PostAddPageState extends State<PostAddPage> {
             color: Colors.blue,
             child: new Text('Post',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: submit,
+            onPressed: takePhoto,
           ),
         ));
   }
