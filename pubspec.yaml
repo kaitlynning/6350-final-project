@@ -32,6 +32,9 @@ dependencies:
   firebase_database: ^3.0.7
   image_picker:
   multi_image_picker:
+  firebase_storage:
+  cloud_firestore:
+  firebase_core:
 
 dev_dependencies:
   flutter_test:

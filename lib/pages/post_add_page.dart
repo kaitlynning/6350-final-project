@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PostAddPage extends StatefulWidget {
   @override
@@ -13,6 +14,8 @@ class _PostAddPageState extends State<PostAddPage> {
   double _price;
   String _desc;
   List<File> _imageList;
+  List<String> _imageUrl = new List();
+  final databaseReference = Firestore.instance;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -34,6 +37,38 @@ class _PostAddPageState extends State<PostAddPage> {
     }
   }
 
+  void uploadImage() async {
+    if (_imageList != null && _imageList.length != 0) {
+      for (var img in _imageList) {
+        String fileName =
+            UniqueKey().toString() + '_' + DateTime.now().toString() + '.jpg';
+        StorageReference firebaseStorageRef = FirebaseStorage.instance
+            .ref()
+            .child("clothing_sale")
+            .child(fileName);
+        StorageUploadTask uploadTask = firebaseStorageRef.putFile(img);
+        StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
+        print('File Uploaded');
+        String imageUrl = await taskSnapshot.ref.getDownloadURL();
+        _imageUrl.add(imageUrl.toString());
+        // firebaseStorageRef.getDownloadURL().then((fileURL) {
+        //   _imageUrl.add(fileURL);
+        //   print(_imageUrl[0]);
+        //   setState(() {
+
+        //   });
+        // });
+      }
+    }
+
+    await databaseReference.collection('clothing_items').add({
+      'title': _title,
+      'price': _price,
+      'description': _desc,
+      'images': _imageUrl,
+    });
+  }
+
   bool validateAndSave() {
     final form = _formKey.currentState;
     if (form.validate()) {
@@ -46,6 +81,7 @@ class _PostAddPageState extends State<PostAddPage> {
   void submit() {
     if (validateAndSave()) {
       print(_title);
+      uploadImage();
     }
   }
 
@@ -193,7 +229,7 @@ class _PostAddPageState extends State<PostAddPage> {
             color: Colors.blue,
             child: new Text('Post',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-            onPressed: takePhoto,
+            onPressed: submit,
           ),
         ));
   }
