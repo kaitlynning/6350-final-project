@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class PostAddPage extends StatefulWidget {
   @override
   _PostAddPageState createState() => new _PostAddPageState();
+  static String routeName = "/postPage";
 }
 
 class _PostAddPageState extends State<PostAddPage> {
@@ -233,4 +234,6 @@ class _PostAddPageState extends State<PostAddPage> {
           ),
         ));
   }
+
 }
+

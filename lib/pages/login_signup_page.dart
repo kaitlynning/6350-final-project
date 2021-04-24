@@ -3,7 +3,7 @@ import '../components/authentication.dart';
 
 class LoginSignupPage extends StatefulWidget {
   LoginSignupPage({this.auth, this.loginCallback});
-
+  static String routeName = '/loginPage';
   final BaseAuth auth;
   final VoidCallback loginCallback;
 
@@ -89,7 +89,7 @@ class _LoginSignupPageState extends State<LoginSignupPage>{
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Flutter login demo"),
+        title: new Text("Clothing Sales👚"),
       ),
       body: Stack(
         children: <Widget>[
@@ -174,7 +174,7 @@ class _LoginSignupPageState extends State<LoginSignupPage>{
         padding: EdgeInsets.fromLTRB(0.0, 70.0, 0.0, 0.0),
         child: CircleAvatar(
           backgroundColor: Colors.transparent,
-          radius: 48.0,
+          radius: 88.0,
           child: Image.asset('assets/flutter-icon.png'),
         ),
       ),
