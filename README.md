@@ -1,14 +1,19 @@
-# exercise_5
+# INFO 6350 Final (Android/iOS) Application project
+NUID 001523744 SsuYu Ning
+NUID 001556226 Penghao Liang
 
 Flutter/ Dart/ Firebase
 
-a  Create flutter login demo
+a  Create Clothing Sale login page. 
 
 b  Set email/password to login.
 
 c If verified, user can login successfully.
 
-d After done checking, click right top button to logout.
+d Browse latest clothing sale items. 
 
-# class-exercise-5a-kaitlynning
+e User can view clothing details, add new clothing, and like the items as their wish.
+
+f After done checking, click right top button to logout.
+
 # 6350-final-project
