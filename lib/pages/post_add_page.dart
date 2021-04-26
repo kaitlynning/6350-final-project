@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_login_demo/pages/post_detail_page.dart';
 
 class PostAddPage extends StatefulWidget {
   @override
@@ -22,6 +24,42 @@ class _PostAddPageState extends State<PostAddPage> {
   var _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final _formKey = GlobalKey<FormState>();
+
+  selectPhoto() async {
+    if (_imageList.length >= 4) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text('Notice'),
+                content: Text(('You can upload up to four pictures.')),
+                actions: <Widget>[
+                  new FlatButton(
+                    child: new Text("Cancel"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ));
+      return;
+    }
+
+    File file = await ImagePicker.pickImage(source: ImageSource.gallery);
+    if (file != null) {
+      //imagesMap[imagesMap.length] = file;
+      List<File> imageFile = new List();
+      // imageList = new List.from(imageFile);
+      imageFile.add(file);
+      if (_imageList == null) {
+        _imageList = new List.from(imageFile, growable: true);
+      } else {
+        for (int s = 0; s < imageFile.length; s++) {
+          _imageList.add(file);
+        }
+      }
+      setState(() {});
+    }
+  }
 
   takePhoto() async {
     if (_imageList.length >= 4) {
@@ -60,6 +98,23 @@ class _PostAddPageState extends State<PostAddPage> {
   }
 
   void uploadImage() async {
+    if (_imageList == null || _imageList.length <= 0) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text('Notice'),
+                content: Text(('You must submit at least 1 photo.')),
+                actions: <Widget>[
+                  new FlatButton(
+                    child: new Text("Cancel"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ));
+      return;
+    }
     setState(() {
       _isLoading = true;
     });
@@ -150,6 +205,7 @@ class _PostAddPageState extends State<PostAddPage> {
               showCircularProgress(),
               showImageView(),
               showPhotoButton(),
+              showGalleryButton(),
               showSubmitButton()
             ],
           ),
@@ -240,7 +296,36 @@ class _PostAddPageState extends State<PostAddPage> {
                     children: List.generate(
                       _imageList.length,
                       (index) {
-                        return Image.file(_imageList[index]);
+                        return InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute<void>(
+                                builder: (BuildContext context) {
+                              return Scaffold(
+                                appBar: AppBar(
+                                  title: const Text('Photo'),
+                                ),
+                                body: Container(
+                                  color: Colors.transparent,
+                                  padding: const EdgeInsets.all(16.0),
+                                  alignment: Alignment.center,
+                                  child: PhotoShowFromFile(
+                                    photo: _imageList[index],
+                                    //width: 300.0,
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ),
+                              );
+                            }));
+                          },
+                          child: Container(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),
+                              child: Image.file(_imageList[index]),
+                            ),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -261,6 +346,23 @@ class _PostAddPageState extends State<PostAddPage> {
             child: new Text('Take Photo',
                 style: new TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed: takePhoto,
+          ),
+        ));
+  }
+
+  Widget showGalleryButton() {
+    return new Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 35.0, 0.0, 0.0),
+        child: SizedBox(
+          height: 50.0,
+          child: new RaisedButton(
+            elevation: 5.0,
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(30.0)),
+            color: Colors.blue,
+            child: new Text('Select Photo',
+                style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+            onPressed: selectPhoto,
           ),
         ));
   }

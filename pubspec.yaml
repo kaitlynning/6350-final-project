@@ -35,6 +35,8 @@ dependencies:
   firebase_storage:
   cloud_firestore:
   firebase_core:
+  flutter_swiper: ^1.1.6
+  path_provider:
 
 dev_dependencies:
   flutter_test:

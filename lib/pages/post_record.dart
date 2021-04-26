@@ -5,6 +5,7 @@ class PostDetail {
   String price;
   String description;
   List<String> pathList;
+  bool liked;
 
   PostDetail(
       String title, String price, String description, List<String> pathList) {
@@ -12,6 +13,7 @@ class PostDetail {
     this.price = price;
     this.description = description;
     this.pathList = pathList;
+    this.liked = false;
   }
 
   Map<String, dynamic> toJson() {
@@ -24,6 +26,7 @@ class PostDetail {
     }
 
     map["photos"] = this.pathList;
+    map["liked"] = this.liked;
     return map;
   }
 }
