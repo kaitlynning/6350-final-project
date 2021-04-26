@@ -6,7 +6,8 @@ class PostDetail {
   String description;
   List<String> pathList;
 
-  PostDetail(String title, String price, String description, List<String> pathList) {
+  PostDetail(
+      String title, String price, String description, List<String> pathList) {
     this.title = title;
     this.price = price;
     this.description = description;
@@ -18,7 +19,7 @@ class PostDetail {
     map["title"] = this.title;
     map["price"] = this.price;
     map["description"] = this.description;
-    for(String s in pathList) {
+    for (String s in pathList) {
       print("pathList item: ${s}");
     }
 
@@ -26,7 +27,6 @@ class PostDetail {
     return map;
   }
 }
-
 
 class Record {
   final String title;
@@ -39,11 +39,11 @@ class Record {
       : assert(map['title'] != null),
         assert(map['price'] != null),
         assert(map['description'] != null),
-        assert(map['photos'] != null),
+        assert(map['images'] != null),
         title = map['title'],
-        price = map['price'],
+        price = map['price'].toString(),
         description = map['description'],
-        photos = map['photos'].cast<String>();
+        photos = map['images'].cast<String>();
 
   Record.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);

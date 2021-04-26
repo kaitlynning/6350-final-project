@@ -14,13 +14,34 @@ class _PostAddPageState extends State<PostAddPage> {
   String _title;
   double _price;
   String _desc;
-  List<File> _imageList;
+  List<File> _imageList = new List();
   List<String> _imageUrl = new List();
+  bool _isLoading = false;
   final databaseReference = Firestore.instance;
+
+  var _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final _formKey = GlobalKey<FormState>();
 
   takePhoto() async {
+    if (_imageList.length >= 4) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text('Notice'),
+                content: Text(('You can upload up to four pictures.')),
+                actions: <Widget>[
+                  new FlatButton(
+                    child: new Text("Cancel"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ));
+      return;
+    }
+
     File file = await ImagePicker.pickImage(source: ImageSource.camera);
     if (file != null) {
       //imagesMap[imagesMap.length] = file;
@@ -39,6 +60,9 @@ class _PostAddPageState extends State<PostAddPage> {
   }
 
   void uploadImage() async {
+    setState(() {
+      _isLoading = true;
+    });
     if (_imageList != null && _imageList.length != 0) {
       for (var img in _imageList) {
         String fileName =
@@ -52,13 +76,6 @@ class _PostAddPageState extends State<PostAddPage> {
         print('File Uploaded');
         String imageUrl = await taskSnapshot.ref.getDownloadURL();
         _imageUrl.add(imageUrl.toString());
-        // firebaseStorageRef.getDownloadURL().then((fileURL) {
-        //   _imageUrl.add(fileURL);
-        //   print(_imageUrl[0]);
-        //   setState(() {
-
-        //   });
-        // });
       }
     }
 
@@ -67,6 +84,25 @@ class _PostAddPageState extends State<PostAddPage> {
       'price': _price,
       'description': _desc,
       'images': _imageUrl,
+    }).whenComplete(() => {
+          showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                    title: Text('Notice'),
+                    content: Text(('Submitted successfully!')),
+                    actions: <Widget>[
+                      new FlatButton(
+                        child: new Text("OK"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ))
+        });
+    setState(() {
+      _isLoading = false;
     });
   }
 
@@ -111,6 +147,7 @@ class _PostAddPageState extends State<PostAddPage> {
               showTitleInput(),
               showPriceInput(),
               showDescInput(),
+              showCircularProgress(),
               showImageView(),
               showPhotoButton(),
               showSubmitButton()
@@ -176,6 +213,16 @@ class _PostAddPageState extends State<PostAddPage> {
     );
   }
 
+  Widget showCircularProgress() {
+    if (_isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return Container(
+      height: 0.0,
+      width: 0.0,
+    );
+  }
+
   Widget showImageView() {
     return new Padding(
         padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
@@ -234,6 +281,4 @@ class _PostAddPageState extends State<PostAddPage> {
           ),
         ));
   }
-
 }
-
