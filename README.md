@@ -1,8 +1,8 @@
-## INFO 6350 Final (Android/iOS) Application project
-# Team Members:
+# INFO 6350 Final (Android/iOS) Application project
+## Team Members:
 NUID 001523744 SsuYu Ning <br />
 NUID 001556226 Penghao Liang <br />
-# Overview:
+## Overview:
 Flutter/ Dart/ Firebase <br />
 a  Create Clothing Sale login page. 
 
