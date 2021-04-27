@@ -37,23 +37,23 @@ class _BrowsePageState extends State<BrowsePage> {
         iconTheme: new IconThemeData(color: Colors.white),
         actions: <Widget>[
           new FlatButton(
-            onPressed: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  LoginSignupPage.routeName, (Route<dynamic> route) => false);
-            },
-            child: Text(
-              "Log out",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+              child: new Text('Logout',
+                  style: new TextStyle(fontSize: 17.0, color: Colors.white)),
+              onPressed: signOut)
         ],
       ),
       body: GetPosts(),
       floatingActionButton: ToPostAddPage(),
     );
+  }
+
+  signOut() async {
+    try {
+      await widget.auth.signOut();
+      widget.logoutCallback();
+    } catch (e) {
+      print(e);
+    }
   }
 }
 
