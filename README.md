@@ -1,9 +1,9 @@
-# INFO 6350 Final (Android/iOS) Application project
-NUID 001523744 SsuYu Ning
-NUID 001556226 Penghao Liang
-
+## INFO 6350 Final (Android/iOS) Application project
+# Member
+NUID 001523744 SsuYu Ning <br />
+NUID 001556226 Penghao Liang <br />
+# Overview:
 Flutter/ Dart/ Firebase
-
 a  Create Clothing Sale login page. 
 
 b  Set email/password to login.
