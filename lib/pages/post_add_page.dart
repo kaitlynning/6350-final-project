@@ -260,6 +260,8 @@ class _PostAddPageState extends State<PostAddPage> {
       padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: new TextFormField(
         keyboardType: TextInputType.multiline,
+        maxLines: 3,
+        minLines: 1,
         autofocus: false,
         decoration: new InputDecoration(
             hintText: 'Description',

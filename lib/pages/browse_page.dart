@@ -37,7 +37,7 @@ class _BrowsePageState extends State<BrowsePage> {
         iconTheme: new IconThemeData(color: Colors.white),
         actions: <Widget>[
           new FlatButton(
-              child: new Text('Logout',
+              child: new Text('Log out',
                   style: new TextStyle(fontSize: 17.0, color: Colors.white)),
               onPressed: signOut)
         ],

@@ -41,18 +41,16 @@ class _DetailPageState extends State<DetailPage> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          /*1*/
           new Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              /*2*/
               Container(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Text(
                   '${postDetail.title}',
                   style: new TextStyle(
                     color: Colors.black,
-                    fontSize: 30,
+                    fontSize: 32,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -63,21 +61,18 @@ class _DetailPageState extends State<DetailPage> {
                   '\$${postDetail.price}',
                   style: new TextStyle(
                     color: Colors.black,
-                    fontSize: 30,
+                    fontSize: 28,
                     fontWeight: FontWeight.w600,
-                    //fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ],
           ),
-          /*3*/
-
           new Text(
             '${postDetail.description}',
             style: new TextStyle(
               color: Colors.black,
-              fontSize: 15,
+              fontSize: 16,
               fontWeight: FontWeight.w400,
             ),
           ),

@@ -21,10 +21,6 @@ class PostDetail {
     map["title"] = this.title;
     map["price"] = this.price;
     map["description"] = this.description;
-    for (String s in pathList) {
-      print("pathList item: ${s}");
-    }
-
     map["photos"] = this.pathList;
     map["liked"] = this.liked;
     return map;
