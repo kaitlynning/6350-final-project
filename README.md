@@ -2,6 +2,9 @@
 ## Team Members:
 NUID 001523744 SsuYu Ning <br />
 NUID 001556226 Penghao Liang <br />
+## Collaboration:
+Login, Signup, BrowsePost page, video demo: Ssu-Yu <br />
+Post add, Firebase Integration, Camera Interaction: Penghao <br />
 ## Overview:
 Flutter/ Dart/ Firebase <br />
 a  Clothing Sale login page. Set email/password to login.<br />
