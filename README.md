@@ -5,7 +5,7 @@ NUID 001556226 Penghao Liang <br />
 ## Overview:
 Flutter/ Dart/ Firebase <br />
 a  Clothing Sale login page. Set email/password to login.
-![138063](https://user-images.githubusercontent.com/56193342/116321598-efaaca00-a7ec-11eb-9c19-4c8b15dd01cf.png)
+<img src="https://user-images.githubusercontent.com/56193342/116321598-efaaca00-a7ec-11eb-9c19-4c8b15dd01cf.png" width="200">
 
 b If verified, user can login successfully to browse latest clothing sale items. 
 ![138058](https://user-images.githubusercontent.com/56193342/116321645-04875d80-a7ed-11eb-8c7d-fb8a03d671b8.png)
