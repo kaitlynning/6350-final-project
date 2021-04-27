@@ -4,16 +4,23 @@ NUID 001523744 SsuYu Ning <br />
 NUID 001556226 Penghao Liang <br />
 ## Overview:
 Flutter/ Dart/ Firebase <br />
-a  Create Clothing Sale login page. 
+a  Clothing Sale login page. Set email/password to login.
+![138063](https://user-images.githubusercontent.com/56193342/116321598-efaaca00-a7ec-11eb-9c19-4c8b15dd01cf.png)
 
-b  Set email/password to login.
+b If verified, user can login successfully to browse latest clothing sale items. 
+![138058](https://user-images.githubusercontent.com/56193342/116321645-04875d80-a7ed-11eb-8c7d-fb8a03d671b8.png)
 
-c If verified, user can login successfully.
+![138062](https://user-images.githubusercontent.com/56193342/116321787-57611500-a7ed-11eb-83ff-0d886a8b47bc.png)
 
-d Browse latest clothing sale items. 
+c User can view clothing details, add new clothing, and like the items as their wish.
+![138059](https://user-images.githubusercontent.com/56193342/116321702-1f59d200-a7ed-11eb-8490-8552a32ae877.png)
 
-e User can view clothing details, add new clothing, and like the items as their wish.
+![138060](https://user-images.githubusercontent.com/56193342/116321711-241e8600-a7ed-11eb-805a-22e3b1430538.png)
 
-f After done checking, click right top button to logout.
+d After done checking, click to create new post.
+![138061](https://user-images.githubusercontent.com/56193342/116321768-49ab8f80-a7ed-11eb-89bb-06dd87e74bcb.png)
+
+
+e Right top button to logout and return to login signup page.
 
 # 6350-final-project
