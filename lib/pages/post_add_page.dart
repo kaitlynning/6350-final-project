@@ -140,22 +140,27 @@ class _PostAddPageState extends State<PostAddPage> {
       'description': _desc,
       'images': _imageUrl,
     }).whenComplete(() => {
-          showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                    title: Text('Notice'),
-                    content: Text(('Submitted successfully!')),
-                    actions: <Widget>[
-                      new FlatButton(
-                        child: new Text("OK"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  ))
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Yay! Submitted successfully!'),
+          ))
+
+          // showDialog(
+          //     context: context,
+          //     builder: (context) => AlertDialog(
+          //           title: Text('Notice'),
+          //           content: Text(('Submitted successfully!')),
+          //           actions: <Widget>[
+          //             new FlatButton(
+          //               child: new Text("OK"),
+          //               onPressed: () {
+          //                 Navigator.of(context).pop();
+          //                 Navigator.of(context).pop();
+          //               },
+          //             ),
+          //           ],
+          //         ))
         });
+    Navigator.of(context).pop();
     setState(() {
       _isLoading = false;
     });
